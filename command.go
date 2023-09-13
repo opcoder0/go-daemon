@@ -14,6 +14,16 @@ func AddCommand(f Flag, sig os.Signal, handler SignalHandlerFunc) {
 	}
 }
 
+// AddCommandWithContext is wrapper on AddFlag and SetSigHandlerWithContext functions.
+func AddCommandWithContext(f Flag, sig os.Signal, handler SignalHandlerWithContextFunc) {
+	if f != nil {
+		AddFlag(f, sig)
+	}
+	if handler != nil {
+		SetSigHandlerWithContext(handler, sig)
+	}
+}
+
 // Flag is the interface implemented by an object that has two state:
 // 'set' and 'unset'.
 type Flag interface {
